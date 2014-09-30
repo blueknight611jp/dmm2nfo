@@ -30,13 +30,14 @@ print "$searchUrl\n";
 
 my $uri = URI->new("$searchUrl");
 my $scraper = scraper {
-     process "/html/body/table/tr/td[2]/div/div[1]/div[2]/div/table/tr[2]/td[1]/p[1]/a",'list' => 'HTML';
+     process "/html/body/table/tr/td[2]/div/div[1]/div[2]/div/table/tr[2]/td[1]/p[1]/a",'title' => 'HTML';
+     process "/html/body/table/tr/td[2]/div/div[1]/div[2]/div/table/tr[2]/td[1]/p[1]/a",'test' => '@href';
 };
 my $res = $scraper->scrape($uri);
 
-my $out = encode('utf-8',$res->{list});
+my $title = encode('utf-8',$res->{title});
+my $id = $res->{test};
  
-print "$out\n";
-
+print "$id : $title\n";
 
 
